@@ -92,6 +92,8 @@ public class login extends javax.swing.JFrame {
         try{
             con =DriverManager.getConnection("jdbc:mysql://localhost/userregistration","root","");
             pst=con.prepareStatement(sql);
+            String uname=jTextField1.getText();
+            String password=jPasswordField1.getText();
             pst.setString(1,jTextField1.getText() );
             pst.setString(2,jPasswordField1.getText() );
             rs=pst.executeQuery();
@@ -101,7 +103,7 @@ public class login extends javax.swing.JFrame {
                 jPasswordField1.setText("");
                 jPasswordField1.setEnabled(false);
                 jButton1.setEnabled(false);
-                new welcome().setVisible(true);
+                new welcome(uname,password).setVisible(true);
             }
             else{
                 JOptionPane.showMessageDialog(null, "Wrong password or username");
