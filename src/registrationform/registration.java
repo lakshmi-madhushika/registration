@@ -52,6 +52,9 @@ public class registration extends javax.swing.JFrame {
         txtpass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("registration form");
+        setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
 
         jLabel1.setText("First Name");
 
@@ -162,6 +165,23 @@ public class registration extends javax.swing.JFrame {
            pst.setString(7, txtUname.getText());
            pst.setString(8, txtpass.getText());
            pst.executeUpdate();
+           txtFname.setText("");
+           txtFname.setEnabled(false);
+           txtLname.setText("");
+           txtLname.setEnabled(false);
+           txtAdd.setText("");
+           txtAdd.setEnabled(false);
+           txtEmail.setText("");
+           txtEmail.setEnabled(false);
+           txtPhone.setText("");
+           txtPhone.setEnabled(false);
+           txtUname.setText("");
+           txtUname.setEnabled(false);
+           txtpass.setText("");
+           txtpass.setEnabled(false);
+           combGen.setSelectedItem("Male");
+           combGen.setEnabled(false);
+           jButton1.setEnabled(false);
            new loginform.login().setVisible(true);
            //JOptionPane.showMessageDialog(null, "REGISTER SUCCESSFULY");
        }catch(Exception ex){
