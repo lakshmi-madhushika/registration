@@ -5,11 +5,19 @@
  */
 package updateform;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author My Plus
  */
 public class update extends javax.swing.JFrame {
+    
+    Connection con=null;
+    PreparedStatement pst=null;
     public void updates(String a,String b,String c,String d,String e,String f, String g){
         jTextField1.setText(a);
         jTextField2.setText(f);
@@ -18,6 +26,8 @@ public class update extends javax.swing.JFrame {
         jTextField5.setText(e);
         jTextField6.setText(b);
         jTextField7.setText(g);
+        jLabel7.setVisible(false);
+        jTextField7.setVisible(false);
     }
 
     /**
@@ -162,7 +172,30 @@ public class update extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String username=jTextField7.getText();
+        String query="UPDATE `user` SET `fname`=?,`lname`=?,`addr`=?,`gender`=?,`email`=?,`phone`=? WHERE uname='"+username+"' ";
+        try{   
+           con=DriverManager.getConnection("jdbc:mysql://localhost/userregistration","root","");
+           pst=con.prepareStatement(query);
+           pst.setString(1, jTextField1.getText());
+           pst.setString(2, jTextField2.getText());
+           pst.setString(3, jTextField6.getText());
+           pst.setString(4, jTextField4.getText());
+           pst.setString(5, jTextField3.getText());
+           pst.setString(6, jTextField5.getText());
+           pst.executeUpdate();
+           jTextField1.setEnabled(false);
+           jTextField2.setEnabled(false);
+           jTextField3.setEnabled(false);
+           jTextField4.setEnabled(false);
+           jTextField5.setEnabled(false);
+           jTextField6.setEnabled(false);
+           jButton1.setEnabled(false);
+           JOptionPane.showMessageDialog(null, "UPDATE SUCCESSFULY");
+        }
+        catch(Exception ex){
+             JOptionPane.showMessageDialog(null, ex);   
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
